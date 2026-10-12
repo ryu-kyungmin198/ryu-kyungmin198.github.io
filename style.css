@@ -1,0 +1,772 @@
+/* ==========================================================================
+   Google 스타일 시작 홈페이지 - style.css
+   모던 구글 머티리얼 디자인 시스템, 반응형 & 다크 테마 지원
+   ========================================================================== */
+
+:root {
+  /* 라이트 모드 컬러 팔레트 */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-elevated: #ffffff;
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --text-tertiary: #80868b;
+  --border-color: #dadce0;
+  --border-focus: #4285f4;
+  
+  /* 구글 시그니처 4대 컬러 */
+  --google-blue: #4285f4;
+  --google-red: #ea4335;
+  --google-yellow: #fbbc05;
+  --google-green: #34a853;
+  
+  /* 컴포넌트 섀도우 & 변수 */
+  --shadow-sm: 0 1px 2px 0 rgba(60, 64, 67, 0.1), 0 1px 3px 1px rgba(60, 64, 67, 0.08);
+  --shadow-md: 0 1px 6px rgba(32, 33, 36, 0.16);
+  --shadow-hover: 0 2px 8px 1px rgba(60, 64, 67, 0.18);
+  --shadow-lg: 0 4px 16px rgba(32, 33, 36, 0.12);
+
+  --chip-bg: #ffffff;
+  --chip-border: #dadce0;
+  --chip-hover-bg: #f1f3f4;
+  
+  --shortcut-bg: #f1f3f4;
+  --shortcut-hover: #e8eaed;
+  
+  --quote-card-bg: rgba(255, 255, 255, 0.85);
+  --quote-border: rgba(218, 220, 224, 0.6);
+  
+  --radius-full: 9999px;
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 다크 모드 컬러 팔레트 */
+[data-theme="dark"] {
+  --bg-primary: #202124;
+  --bg-secondary: #171717;
+  --bg-elevated: #303134;
+  --text-primary: #e8eaed;
+  --text-secondary: #9aa0a6;
+  --text-tertiary: #70757a;
+  --border-color: #3c4043;
+  --border-focus: #8ab4f8;
+
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 1px 6px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 2px 10px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 6px 20px rgba(0, 0, 0, 0.6);
+
+  --chip-bg: #303134;
+  --chip-border: #3c4043;
+  --chip-hover-bg: #3c4043;
+
+  --shortcut-bg: #303134;
+  --shortcut-hover: #3c4043;
+
+  --quote-card-bg: rgba(48, 49, 52, 0.85);
+  --quote-border: rgba(60, 64, 67, 0.8);
+}
+
+/* 기본 리셋 & 공통 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Roboto', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 전체 컨테이너 */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px 24px 28px;
+  position: relative;
+}
+
+/* ==========================================================================
+   1. 상단 헤더 (Top Bar)
+   ========================================================================== */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+}
+
+/* 시계 & 날짜 위젯 */
+.time-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  user-select: none;
+}
+
+.digital-clock {
+  font-family: 'Product Sans', 'Roboto', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.calendar-date {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* 우측 상단 컨트롤 (날씨 허브 + 테마 버튼) */
+.top-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 날씨 허브 */
+.weather-hub {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 4px 6px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.weather-hub:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* 날씨 칩 */
+.weather-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  background: var(--chip-bg);
+  border: 1px solid var(--chip-border);
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  cursor: default;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.weather-chip:hover {
+  background-color: var(--chip-hover-bg);
+}
+
+.weather-chip-city {
+  font-weight: 700;
+  color: var(--google-blue);
+  background: rgba(66, 133, 244, 0.08);
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+}
+
+[data-theme="dark"] .weather-chip-city {
+  background: rgba(138, 180, 248, 0.16);
+  color: var(--border-focus);
+}
+
+.weather-chip-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+}
+
+.weather-chip-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.weather-chip-info {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.weather-temp {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.weather-desc {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+}
+
+.weather-chip-range {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  padding-left: 2px;
+  border-left: 1px solid var(--border-color);
+}
+
+.temp-high {
+  color: var(--google-red);
+}
+
+.temp-low {
+  color: var(--google-blue);
+}
+
+/* 로딩 도트 애니메이션 */
+.loader-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--google-blue);
+  animation: pulseDot 1.2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* 공통 아이콘 버튼 */
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.icon-button:hover {
+  background-color: var(--shortcut-hover);
+  color: var(--text-primary);
+}
+
+.icon-button:active {
+  transform: scale(0.92);
+}
+
+/* 테마 토글 아이콘 제어 */
+.theme-toggle {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-toggle:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.sun-icon {
+  display: none;
+}
+
+.moon-icon {
+  display: block;
+}
+
+[data-theme="dark"] .sun-icon {
+  display: block;
+  color: #fbbc04;
+}
+
+[data-theme="dark"] .moon-icon {
+  display: none;
+}
+
+/* ==========================================================================
+   2. 메인 중앙 콘텐츠 (Google Brand & Search & Shortcuts)
+   ========================================================================== */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 40px 16px 20px;
+}
+
+/* 구글 브랜드 로고 */
+.google-brand {
+  font-family: 'Product Sans', 'Roboto', sans-serif;
+  font-size: 5rem;
+  font-weight: 700;
+  letter-spacing: -2px;
+  margin-bottom: 28px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+}
+
+.google-brand:hover {
+  transform: scale(1.02);
+}
+
+.letter-g-blue { color: var(--google-blue); }
+.letter-o-red { color: var(--google-red); }
+.letter-o-yellow { color: var(--google-yellow); }
+.letter-l-green { color: var(--google-green); }
+.letter-e-red { color: var(--google-red); }
+
+/* 구글 검색 폼 & 서치박스 */
+.search-form {
+  width: 100%;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  padding: 0 14px 0 16px;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.search-box:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: transparent;
+}
+
+.search-box:focus-within {
+  box-shadow: var(--shadow-hover);
+  border-color: transparent;
+  background-color: var(--bg-elevated);
+}
+
+.search-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  margin-right: 12px;
+}
+
+.search-input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-family: inherit;
+}
+
+.search-input::placeholder {
+  color: var(--text-tertiary);
+  font-size: 0.95rem;
+}
+
+/* 돋보기 / 클리어 버튼 */
+.clear-button {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  margin-right: 4px;
+  transition: all var(--transition-fast);
+}
+
+.clear-button.visible {
+  display: flex;
+}
+
+.clear-button:hover {
+  background-color: var(--shortcut-hover);
+  color: var(--text-primary);
+}
+
+.submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--radius-full);
+  border: none;
+  background-color: var(--google-blue);
+  color: #ffffff;
+  font-size: 0.86rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.submit-button:hover {
+  background-color: #3367d6;
+  box-shadow: 0 1px 3px rgba(66, 133, 244, 0.3);
+}
+
+.submit-button:active {
+  transform: scale(0.96);
+}
+
+/* ==========================================================================
+   즐겨찾기 바로가기 (Shortcuts Grid)
+   ========================================================================== */
+.shortcuts-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+  width: 100%;
+}
+
+.shortcut-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 84px;
+  padding: 8px 4px;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.shortcut-item:hover {
+  background-color: var(--shortcut-hover);
+  transform: translateY(-2px);
+}
+
+.shortcut-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--shortcut-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.shortcut-item:hover .shortcut-icon {
+  transform: scale(1.06);
+  box-shadow: var(--shadow-md);
+}
+
+.shortcut-title {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* 서울디지털대학교 (SDU) 특별 강조 스타일 */
+.shortcut-item.highlight-sdu .sdu-icon {
+  background: linear-gradient(135deg, #0f4c81, #1e70b8);
+  color: #ffffff;
+}
+
+.sdu-badge {
+  position: absolute;
+  bottom: -4px;
+  font-size: 0.6rem;
+  font-weight: 800;
+  background-color: #e5a93b;
+  color: #111111;
+  padding: 0 4px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.shortcut-item.highlight-sdu .shortcut-title {
+  font-weight: 700;
+  color: var(--google-blue);
+}
+
+[data-theme="dark"] .shortcut-item.highlight-sdu .shortcut-title {
+  color: var(--border-focus);
+}
+
+/* 네이버 아이콘 커스텀 */
+.naver-icon {
+  background-color: #03c75a;
+  color: #ffffff;
+}
+
+.naver-letter {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   3. 하단 섹션: 오늘의 명언 (Daily Quote)
+   ========================================================================== */
+.quote-section {
+  width: 100%;
+  max-width: 780px;
+  margin: 20px auto 0;
+}
+
+.quote-card {
+  background: var(--quote-card-bg);
+  border: 1px solid var(--quote-border);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+.quote-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.quote-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.quote-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--google-blue);
+}
+
+[data-theme="dark"] .quote-tag {
+  color: var(--border-focus);
+}
+
+.quote-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quote-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.quote-btn:hover {
+  background-color: var(--shortcut-hover);
+  color: var(--text-primary);
+}
+
+.quote-btn:active {
+  transform: scale(0.95);
+}
+
+.quote-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.quote-body.fade-out {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.quote-korean {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+
+.quote-english {
+  font-size: 0.88rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.quote-author {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--google-red);
+  margin-top: 4px;
+  align-self: flex-end;
+}
+
+[data-theme="dark"] .quote-author {
+  color: #f28b82;
+}
+
+/* ==========================================================================
+   4. 토스트 알림 (Toast Notification)
+   ========================================================================== */
+.toast-message {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #202124;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.3s ease;
+  z-index: 1000;
+}
+
+[data-theme="dark"] .toast-message {
+  background: #e8eaed;
+  color: #202124;
+}
+
+.toast-message.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   5. 반응형 미디어 쿼리 (Responsive Queries)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding: 12px 14px 20px;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .top-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .weather-hub {
+    flex: 1;
+    overflow-x: auto;
+  }
+
+  .google-brand {
+    font-size: 3.6rem;
+    margin-bottom: 20px;
+  }
+
+  .shortcuts-container {
+    gap: 10px;
+  }
+
+  .shortcut-item {
+    width: 72px;
+  }
+
+  .shortcut-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .quote-card {
+    padding: 16px;
+  }
+
+  .quote-korean {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .weather-chip-range {
+    display: none;
+  }
+
+  .weather-chip {
+    padding: 4px 8px;
+    font-size: 0.76rem;
+  }
+
+  .google-brand {
+    font-size: 3rem;
+  }
+
+  .submit-button span {
+    display: none;
+  }
+  
+  .submit-button {
+    padding: 0 10px;
+  }
+  
+  .submit-button::after {
+    content: "🔍";
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google 스타일 시작 페이지</title>
+  <meta name="description" content="실시간 날씨(서울, 김해), 구글 검색, 오늘의 명언 및 서울디지털대학교 바로가기를 제공하는 시작 페이지" />
+  <!-- Google Fonts: Google Sans & Pretendard -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Product+Sans:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- 상단 헤더: 시계 및 날씨 위젯, 테마 토글 -->
+    <header class="top-bar">
+      <!-- 현재 시간 및 날짜 -->
+      <div class="time-widget" id="timeWidget">
+        <span class="digital-clock" id="digitalClock">--:--:--</span>
+        <span class="calendar-date" id="calendarDate">----년 --월 --일 (-)</span>
+      </div>
+
+      <!-- 우측 컨트롤: 날씨 위젯 + 테마 버튼 -->
+      <div class="top-controls">
+        <!-- 서울 & 김해 날씨 컨테이너 -->
+        <div class="weather-hub" id="weatherHub">
+          <!-- 서울 날씨 카드 -->
+          <div class="weather-chip" id="weatherSeoul" title="서울 실시간 날씨">
+            <div class="weather-chip-city">서울</div>
+            <div class="weather-chip-icon" id="seoulIcon">
+              <span class="loader-dot"></span>
+            </div>
+            <div class="weather-chip-info">
+              <span class="weather-temp" id="seoulTemp">--°</span>
+              <span class="weather-desc" id="seoulDesc">불러오는 중</span>
+            </div>
+            <div class="weather-chip-range" id="seoulRange">
+              <span class="temp-high" id="seoulMax">--°</span> / <span class="temp-low" id="seoulMin">--°</span>
+            </div>
+          </div>
+
+          <!-- 김해 날씨 카드 -->
+          <div class="weather-chip" id="weatherGimhae" title="김해 실시간 날씨">
+            <div class="weather-chip-city">김해</div>
+            <div class="weather-chip-icon" id="gimhaeIcon">
+              <span class="loader-dot"></span>
+            </div>
+            <div class="weather-chip-info">
+              <span class="weather-temp" id="gimhaeTemp">--°</span>
+              <span class="weather-desc" id="gimhaeDesc">불러오는 중</span>
+            </div>
+            <div class="weather-chip-range" id="gimhaeRange">
+              <span class="temp-high" id="gimhaeMax">--°</span> / <span class="temp-low" id="gimhaeMin">--°</span>
+            </div>
+          </div>
+
+          <!-- 날씨 새로고침 버튼 -->
+          <button class="icon-button" id="refreshWeatherBtn" title="날씨 새로고침" aria-label="날씨 정보 새로고침">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 다크/라이트 모드 스위치 버튼 -->
+        <button class="icon-button theme-toggle" id="themeToggleBtn" title="테마 변경 (라이트/다크)" aria-label="테마 전환">
+          <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- 중앙 메인 영역 (로고, 검색창, 바로가기 바로가기) -->
+    <main class="main-content">
+      <!-- 구글 브랜드 로고 -->
+      <div class="google-brand" aria-label="Google">
+        <span class="letter-g-blue">G</span>
+        <span class="letter-o-red">o</span>
+        <span class="letter-o-yellow">o</span>
+        <span class="letter-g-blue">g</span>
+        <span class="letter-l-green">l</span>
+        <span class="letter-e-red">e</span>
+      </div>
+
+      <!-- 구글 검색창 폼 -->
+      <form class="search-form" id="searchForm" action="https://www.google.com/search" method="GET" target="_blank" rel="noopener noreferrer">
+        <div class="search-box">
+          <!-- 돋보기 아이콘 -->
+          <div class="search-icon-wrapper" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+
+          <!-- 검색 입력 필드 -->
+          <input
+            type="search"
+            id="searchInput"
+            name="q"
+            class="search-input"
+            placeholder="Google 검색 또는 URL 입력"
+            autocomplete="off"
+            autofocus
+            required
+            aria-label="Google 검색"
+          />
+
+          <!-- 입력 텍스트 초기화 버튼 -->
+          <button type="button" class="clear-button" id="clearBtn" title="검색어 지우기" aria-label="검색어 지우기">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
+          <!-- 검색 제출 버튼 -->
+          <button type="submit" class="submit-button" id="searchBtn" title="검색 실행" aria-label="Google 검색 실행">
+            <span>검색</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- 바로가기 바로가기 (Shortcuts) : 서울디지털대학교 포함 -->
+      <nav class="shortcuts-container" aria-label="빠른 바로가기 모음">
+        <!-- 서울디지털대학교 (SDU) -->
+        <a href="https://www.sdu.ac.kr" target="_blank" rel="noopener noreferrer" class="shortcut-item highlight-sdu" title="서울디지털대학교 공식 웹사이트">
+          <div class="shortcut-icon sdu-icon">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+            </svg>
+            <span class="sdu-badge">SDU</span>
+          </div>
+          <span class="shortcut-title">서울디지털대</span>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="shortcut-item" title="유튜브">
+          <div class="shortcut-icon youtube-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="#FF0000">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </div>
+          <span class="shortcut-title">YouTube</span>
+        </a>
+
+        <!-- Gmail -->
+        <a href="https://mail.google.com" target="_blank" rel="noopener noreferrer" class="shortcut-item" title="구글 메일">
+          <div class="shortcut-icon gmail-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path fill="#4285F4" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/>
+            </svg>
+          </div>
+          <span class="shortcut-title">Gmail</span>
+        </a>
+
+        <!-- 네이버 (Naver) -->
+        <a href="https://www.naver.com" target="_blank" rel="noopener noreferrer" class="shortcut-item" title="네이버">
+          <div class="shortcut-icon naver-icon">
+            <span class="naver-letter">N</span>
+          </div>
+          <span class="shortcut-title">네이버</span>
+        </a>
+
+        <!-- GitHub -->
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="shortcut-item" title="GitHub">
+          <div class="shortcut-icon github-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+          </div>
+          <span class="shortcut-title">GitHub</span>
+        </a>
+
+        <!-- ChatGPT -->
+        <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="shortcut-item" title="ChatGPT">
+          <div class="shortcut-icon chatgpt-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16.5h-2v-2h2v2zm0-4.5h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/>
+            </svg>
+          </div>
+          <span class="shortcut-title">ChatGPT</span>
+        </a>
+      </nav>
+    </main>
+
+    <!-- 하단: 오늘의 명언 카드 섹션 -->
+    <footer class="quote-section">
+      <div class="quote-card" id="quoteCard">
+        <div class="quote-header">
+          <div class="quote-tag">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+            </svg>
+            <span>오늘의 명언</span>
+          </div>
+          <div class="quote-actions">
+            <button class="quote-btn" id="copyQuoteBtn" title="명언 클립보드 복사" aria-label="명언 복사">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>복사</span>
+            </button>
+            <button class="quote-btn" id="newQuoteBtn" title="다른 명언 보기" aria-label="새 명언 가져오기">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+              </svg>
+              <span>새로고침</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="quote-body">
+          <p class="quote-korean" id="quoteText">인생에서 가장 큰 위험은 어떠한 위험도 감수하지 않는 것이다.</p>
+          <p class="quote-english" id="quoteEnText">The biggest risk is not taking any risk.</p>
+          <p class="quote-author" id="quoteAuthor">— 마크 저커버그 (Mark Zuckerberg)</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 복사 알림 토스트 (Toast) -->
+    <div class="toast-message" id="toastMessage" role="alert" aria-live="polite">
+      명언이 클립보드에 복사되었습니다! ✨
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
